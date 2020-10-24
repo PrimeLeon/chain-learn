@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <button @click="boost">触发事件</button>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          message: "hello vue"
+        }
+      },
+      created() {
+        // my_events可以是一个数组
+        this.$on('my_events', this.handleEvents);
+        this.$on('my_events', this.handleEvents2);
+      },
+      methods: {
+        handleEvents(params) {
+          console.log("handleEvents", params);
+        },
+        handleEvents2(params) {
+          console.log("handleEvents2", params);
+        },
+        boost() {
+          // 讲myvars作为消息传递到my_events上
+          this.$emit('my_events', 'myvars');
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
